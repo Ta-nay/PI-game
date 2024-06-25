@@ -1,0 +1,35 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Pixelify+Sans:wght@500&family=Shadows+Into+Light&display=swap');
+
+body{
+    background-color: #3F4B6E;
+    font-family: "Kalam", cursive;
+    color: #150f47;
+
+}
+
+.mainClass{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10vh;
+}
+
+.heading{
+    background-color: #A5B0CD;
+    padding: 10px 8px;
+    border-radius: 5px;
+    text-align: center;
+}
+.SquareWrapper{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    row-gap: 20px;
+    column-gap: 5px;
+}
+
+.py{
+    float:left;
+    color: rgb(241, 200, 148);
+    font-size: 40px;
+}
