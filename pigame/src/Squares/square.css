@@ -5,6 +5,7 @@
     border-radius: 5px;
     font-size: 25px;
     color: black;
+    text-align: center;
 }
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 

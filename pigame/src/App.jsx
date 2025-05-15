@@ -1,28 +1,65 @@
+import  { useState } from "react";
+import "./App.css";
+import Square from "./Squares/Square";
 
-import React from 'react'
-import './App.css'
-import Square from './Squares/Square'
-
-const renderFrom = [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
-[21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40],
-[41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60],
-[61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80],
-[81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100]]
+const PI = "14159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798";
 
 const App = () => {
-  return (
-    <div className='mainClass'>
-        <div>
-            <h1 className='heading'>PI games</h1>
-            <div className='py'>3.</div>
-            <div className='SquareWrapper'>
-                {renderFrom.map(arr =>{
-                   return arr.map(e => <Square key={e}/>)
-                })}
-            </div>
-        </div>
-    </div>
-  )
-}
+  const [box, setBox] = useState(new Array(100).fill(""));
+  const [focusIndex, setFocusIndex] = useState(0);
+  const [gameOver, setGameOver] = useState(false);
 
-export default App
+  const handleChange = (index, value) => {
+    const updatedBox = [...box];
+    updatedBox[index] = value;
+
+    if (value !== "") {
+      if (value === PI[index]) {
+        setBox(updatedBox);
+
+        // Move focus to the next input only if the current input is correct
+        if (index < box.length - 1) {
+          setFocusIndex(index + 1);
+        }
+      } else {
+        setGameOver(true);
+        setFocusIndex(null); // Disable further focus
+        alert(`Game Over! You entered a wrong digit at position ${index + 1}.`);
+      }
+    }
+  };
+
+  const handleRestart = () => {
+    setBox(new Array(100).fill(""));
+    setFocusIndex(0);
+    setGameOver(false);
+  };
+
+  return (
+    <div className="mainClass">
+      <div>
+        <h1 className="heading">PI Game</h1>
+        <div className="py">3.</div>
+        <div className="SquareWrapper">
+          {box.map((item, index) => (
+            <Square
+              key={index}
+              value={item}
+              index={index}
+              focusIndex={focusIndex}
+              handleChange={handleChange}
+              gameOver={gameOver}
+            />
+          ))}
+        </div>
+        {gameOver && (
+          <div className="game-over">
+            <button onClick={handleRestart}>Restart Game</button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default App;
